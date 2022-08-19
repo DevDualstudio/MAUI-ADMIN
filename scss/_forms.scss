@@ -1,0 +1,12 @@
+$input-border-radius: 0.25rem;
+$form-label-font-weight: 600;
+$form-check-input-checked-color: #ffffff;
+$form-check-input-checked-bg-color: #35b9cb;
+$form-check-input-checked-border-color: #35b9cb;
+
+
+$input-btn-focus-width:         .25rem;
+$input-btn-focus-color-opacity: .25;
+$input-btn-focus-color:         rgba($component-active-bg, $input-btn-focus-color-opacity);
+$input-btn-focus-blur:          0;
+$input-btn-focus-box-shadow:    0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color;

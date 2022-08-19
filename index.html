@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dashboard | MAUI</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Fonts - Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-mprimary-100" id="sidebar-wrapper">
+            <div class="sidebar-heading py-4">
+                <img class="brand-img" src="/assets/images/logotipo-blanco-01.png">
+            </div>
+
+            <hr class="sidebar-divider my-0">
+
+            <div class="list-group list-group-flush my-3">
+
+                <a href="/index.html" class="list-group-item list-group-item-action bg-transparent text-light active">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-13.png" alt="Dashboard">
+                    Dashboard
+                </a>
+
+                <a href="/clientes.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra_01.png" alt="Clientes">
+                    Clientes
+                </a>
+                <a href="/puestos-empleados.html"
+                    class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra_02.png" alt="Puestos de Empleados">
+                    Puestos de Empleados
+                </a>
+                <a href="/empleados.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/icon-user.png" alt="Empleados">
+                    Empleados</a>
+                <a href="/vehiculos.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="assets/icons/iconos-barra-03.png" alt="Vehículos">
+                    Vehículos</a>
+                <a href="/remolques.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-02.png" alt="Remolques">
+                    Remolques</a>
+                <a href="/origen.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-06.png" alt="Origen">
+                    Origen</a>
+                <a href="/destinos.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-07.png" alt="Destinos">
+                    Destinos</a>
+
+                <a href="/tipos-usuario.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-08.png" alt="Tipos de Usuario">
+                    Tipos de Usuario</a>
+
+                <a href="/usuario-portal.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-09.png" alt="Usuario Portal">
+                    Usuario Portal</a>
+
+
+                <a href="/ventas.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-11.png" alt="Ventas">
+                    Ventas</a>
+
+                <a href="/guias.html" class="list-group-item list-group-item-action bg-transparent text-light">
+                    <img class="icon mx-2" src="/assets/icons/iconos-barra-12.png" alt="Guías">
+                    Guías</a>
+
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div class="bg-mgrey" id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-bars fs-5 text-mprimary-100" id="menu-toggle"></i>
+                </div>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars text-mprimary-100"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <form class="d-flex mx-2">
+                            <div class="input-group my-2">
+                                <input class="form-control" type="search" aria-label="Search" />
+                                <button class="btn btn-mprimary-100" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass text-light"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <li class="nav-item dropdown mx-2" style="">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-bell fa-lg mt-3 text-mprimary-100"></i>
+                                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Notificación #1</a></li>
+                                <li><a class="dropdown-item" href="#">Notificación #2</a></li>
+                                <li><a class="dropdown-item" href="#">Notificación #3</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="assets/avatars/Active Men.png"
+                                    class="img-fluid rounded-circle avatar mr-2 bg-mprimary-030" alt="Avatar">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <a class="dropdown-item" href="#">Configuraión</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/login.html">Cerrar sesión</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4">
+                <section class="py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-8">
+                                <h1 class="h2 fw-bold my-2">Bienvenido <span class="text-mprimary-100">USUARIO</span>
+                                </h1>
+                                <!-- <p class="lead text-muted">Revisa la última información</p> -->
+                            </div>
+                            <!-- <div class="col-lg-3 col-md-4 d-flex">
+                          <button class="btn btn-mprimary-100 w-100 align-self-center text-light">Descargar reporte</button>
+                        </div> -->
+
+
+                        </div>
+                        <!-- Cards -->
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card border-left-primary bg-mprimary-100 text-white h-100">
+                                    <div class="card-body py-4">
+                                        <div class="small text-uppercase mb-4">Usuarios</div>
+                                        <div class="h2 mb-0 fw-semibold">577</div>
+                                    </div>
+                                    <!-- <div class="card-footer d-flex">
+                                        Ver detalles
+                                        <span class="ms-auto">
+                                           <i class="fa-solid fa-chevron-right"></i>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 mb-3">
+                                <div class="card border-left-primary bg-mprimary-100 text-white h-100">
+                                    <div class="card-body py-4">
+                                        <div class="small text-uppercase mb-4">Total de ventas</div>
+                                        <div class="h2 mb-0 fw-bold">
+                                            $ 577,000.00
+                                        </div>
+                                    </div>
+                                    <!-- <div class="card-footer d-flex">
+                                        Ver detalles
+                                        <span class="ms-auto">
+                                           <i class="fa-solid fa-chevron-right"></i>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 mb-3">
+                                <div class="card border-left-primary bg-mprimary-100 text-white h-100">
+                                    <div class="card-body py-4">
+                                        <div class="small text-uppercase mb-4">Total de guías</div>
+                                        <div class="h2 mb-0 fw-bold">577</div>
+                                    </div>
+                                    <!-- <div class="card-footer d-flex">
+                                        Ver detalles
+                                        <span class="ms-auto">
+                                           <i class="fa-solid fa-chevron-right"></i>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold">Analítica de Ventas</h6>
+                                            <span class="text-muted d-block small">Calculado por mes
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="analiticaVentas" width="400" height="150"></canvas>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mt-4 mb-3">
+                                                    <h6 class="fw-bold small text-uppercase mb-0">Active Resource</h6>
+                                                    <p class="small fw-bold mb-0 text-mprimary-100">$ 345,679.00</p>
+                                                </div>
+
+                                                <div class="mb-0">
+                                                    <p class="small text-muted">Lorem ipsum dolor sit amet consectetur,
+                                                        adipisicing
+                                                        elit.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="mt-4 mb-3">
+                                                    <h6 class="fw-bold small text-uppercase mb-0">Inactive Resource</h6>
+                                                    <p class="small fw-bold mb-0 text-mprimary-100">$ 345,679.00</p>
+                                                </div>
+
+                                                <div class="mb-0">
+                                                    <p class="small text-muted">Lorem ipsum dolor sit amet consectetur,
+                                                        adipisicing
+                                                        elit.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold">Estadísticas</h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted small">Lorem ipsum dolor sit amet consectetur
+                                            adipisicing elit. Quia
+                                            praesentium, provident optio officia magnam soluta sit excepturi nobis error
+                                            iste quod qui magni
+                                            rem libero delectus facilis ex consequuntur.
+                                        </p>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div>
+                                                        <div class="fw-bold small ">Visitantes</div>
+                                                        <span class="small text-muted d-block">35</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-8 mb-2">
+                                                <div class="d-flex align-items-center">
+
+                                                    <div>
+                                                        <div class="fw-bold small">Visitante registrado</div>
+                                                        <span class="small text-muted d-block">15</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <canvas id="estadisticas" width="400"></canvas>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold">Actividad Reciente</h6>
+                                            <span class="text-muted d-block small">Registro de todas las sesiones en el
+                                                sistema
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-responsive table-borderless" style="width: 100%">
+                                            <thead>
+                                                <tr class="text-mprimary-100">
+                                                    <th>Broswer</th>
+                                                    <th>Sessions</th>
+                                                    <th>Bounce Rate</th>
+                                                    <th>Conversion Rate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th><i class="fa-brands fa-chrome"></i> Google Chrome</th>
+                                                    <td>12,345</td>
+                                                    <td>40.12 %</td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><i class="fab fa-firefox"></i> Mozilla Firefox</th>
+                                                    <td>12,345</td>
+                                                    <td>40.12 %</td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><i class="fab fa-edge"></i> Microsoft Edge</th>
+                                                    <td>12,345</td>
+                                                    <td>40.12 %</td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><i class="fab fa-opera"></i> Opera</th>
+                                                    <td>12,345</td>
+                                                    <td>40.12 %</td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold"> Visitas Totales</h6>
+                                            <span class="text-muted d-block small">Registro de todas las sesiones en el
+                                                sistema
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-responsive table-borderless" style="width: 100%">
+                                            <thead>
+                                                <tr class="text-mprimary-100">
+                                                    <th>Link</th>
+                                                    <th>Página</th>
+                                                    <th>Porcentaje</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th><a class="btn btn-link btn-rounded btn-sm" href="#!"><i
+                                                                class="fa-solid fa-link text-mprimary-030"></i></a></th>
+                                                    <td>Home Page</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-mprimary-100" role="progressbar"
+                                                                style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><a class="btn btn-link btn-rounded btn-sm" href="#!"><i
+                                                                class="fa-solid fa-link text-mprimary-030"></i></a></th>
+                                                    <td>Our Productos</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-mprimary-100" role="progressbar"
+                                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><a class="btn btn-link btn-rounded btn-sm" href="#!"><i
+                                                                class="fa-solid fa-link text-mprimary-030"></i></a></i>
+                                                    </th>
+                                                    <td>Our Services</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-mprimary-100" role="progressbar"
+                                                                style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><a class="btn btn-link btn-rounded btn-sm" href="#!"><i
+                                                                class="fa-solid fa-link text-mprimary-030"></i></a></th>
+                                                    <td>Contact Us</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-mprimary-100" role="progressbar"
+                                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>12.57 %</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold"> Ventas</h6>
+                                            <span class="text-muted d-block small">Calculadas anualmente
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="mb-3">
+                                                    <span class="small">Clientes</span>
+                                                    <h6 class="fw-bold mb-0">15,2K</h6>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="mb-3">
+                                                    <span class="small">Ordenes</span>
+                                                    <h6 class="fw-bold mb-0">10K</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="mb-3">
+                                                    <span class="small">Usuarios</span>
+                                                    <h6 class="fw-bold mb-0">34 %</h6>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="mb-3">
+                                                    <span class="small">Guías vendidas</span>
+                                                    <h6 class="fw-bold mb-0">11K</h6>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <canvas id="ventasAnual" width="400" height="200"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold"> Ventas</h6>
+                                            <span class="text-muted d-block small">Calculadas semanalmente
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="mb-3">
+                                                    <span class="small">Crecimiento</span>
+                                                    <h6 class="fw-bold mb-0">$ 123,456.00</h6>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="mb-3">
+                                                    <span class="small">Balance</span>
+                                                    <h6 class="fw-bold mb-0">$ 123,456.00</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="mb-3">
+                                                    <span class="small">Usuario Nuevos</span>
+                                                    <h6 class="fw-bold mb-0">734.09 %</h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <canvas id="ventasSemanal" width="400" height="200"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold">Guías en Proceso de Entrega</h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="area-chart-doughnut mb-4">
+                                            <canvas id="guiasProceso"></canvas>
+                                        </div>
+                                        <div class="text-center mb-2">
+                                            <h6 class="small m-0 fw-bold text-mprimary-100"> Ventas</h6>
+                                            <span class="text-muted d-block small text-mprimary-100">327
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold"> Nuevos clientes</h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-light">
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Happy Woman.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Laura Medina</p>
+                                                        <p class="small text-muted mb-0">Cliente <strong>#0157</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Men With Red Cloth.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Roberto Gómez</p>
+                                                        <p class="small text-muted mb-0">Cliente <strong>#0158</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Entrepreneur Girl.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Leticia Vargas</p>
+                                                        <p class="small text-muted mb-0">Cliente <strong>#0159</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Men With Beanie.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Enrique Vargas</p>
+                                                        <p class="small text-muted mb-0">Cliente <strong>#0160</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 my-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white pt-3">
+                                        <div class="mb-0">
+                                            <h6 class="m-0 fw-bold"> Usuarios conectados</h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-light">
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Smiley Girl.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Michelle Gutiérrez</p>
+                                                        <p class="small text-muted mb-0">Administrador
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Innocent Men.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Jorge Jiménez</p>
+                                                        <p class="small text-muted mb-0">Administrador
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Short Hair Girl.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Teresa Ramos</p>
+                                                        <p class="small text-muted mb-0">Chofer
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assets/avatars/Fun Boy.png" alt=""
+                                                        style="width: 56px; height: 56px"
+                                                        class="rounded-circle bg-mprimary-030" />
+                                                    <div class="ms-3">
+                                                        <p class="fw-bold mb-1">Rafael Contreras</p>
+                                                        <p class="small text-muted mb-0">Chofer
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-link btn-rounded btn-sm" href="#!" role="button">
+                                                    <i class="fa-solid fa-angle-right text-mprimary-030"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/dashboard.js"></script>
+
+    <!-- Charts -->
+    <script src="/node_modules/chart.js/dist/chart.min.js"></script>
+    <script src="/js/charts/analiticaVentas.js"></script>
+    <script src="/js/charts/estadisticas.js"></script>
+    <script src="/js/charts/ventasAnual.js"></script>
+    <script src="/js/charts/ventasSemanal.js"></script>
+    <script src="/js/charts/guiasProceso.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+$custom-colors: (
+  "msecondary-030": rgb(238, 130, 90),
+  "mprimary-030": rgb(114, 206, 219),
+  "msecondary-100": rgb(230, 77, 19),
+  "mprimary-130": rgb(30, 168, 187),
+  "mprimary-100": rgb(53, 185, 203),
+  "mgrey": rgb(246, 248, 254),
+);
+
+$theme-colors: map-merge(
+  $map1: $theme-colors,
+  $map2: $custom-colors,
+);
