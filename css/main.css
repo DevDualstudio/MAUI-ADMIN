@@ -11490,3 +11490,5 @@ a img.icon {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+.redClass { background-color: rgba( 128, 0, 0, 0.2 ) !important; }
