@@ -65,7 +65,7 @@ function eliminaRegistro(valorId) {
 			$.ajax({
                 type: "POST",
                 url: "php/EliminaRegistro.php",
-                data: { 'Id': valorId, 'Tabla': 'empleados', 'CampoID': 'em_id' },
+                data: { 'Id': valorId, 'Tabla': 'Empleados', 'CampoID': 'em_id' },
                 success: function (data) {
                     var json = JSON.parse(data);
                     const code = parseInt(json["code"]);
@@ -110,28 +110,48 @@ $("#insertEmpleado").on("show.bs.modal", function (event) {
 $('#formInsertEmpleado').submit(function (evt) {
     evt.preventDefault();
     var formData = new FormData(this);
-
-    $.ajax({
-        type: 'POST',
-        url: "php/InsertarEmpleado.php",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            console.log(data)
-            crear_notificacion_datatable(data, tableEmpleados)
-        },
-        error: function (data) {
-            swal({
-                title: 'Error',
-                text: 'Ocurrió un error en el servidor al tratar de crear el Empleado.',
-                icon: "error",
-                button: "Aceptar",
-            });
-        }
-    });
+    if ( validaRfc( $( '#RFCE' ).val() ) ) {
+        $.ajax({
+            type: 'POST',
+            url: "php/InsertarEmpleado.php",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                var info = JSON.parse( data );
+                crear_notificacion_datatable(data, tableEmpleados)
+                if ( info.code == '200' ) {
+                    popup( 'insertEmpleado', false );
+                }
+            },
+            error: function (data) {
+                swal({
+                    title: 'Error',
+                    text: 'Ocurrió un error en el servidor al tratar de crear el Empleado.',
+                    icon: "error",
+                    button: "Aceptar",
+                });
+            }
+        });
+    } else {
+        swal({
+            title: 'RFC Invalido',
+            text: 'Favor de ingresar un RFC valido para continuar',
+            icon: "error",
+            button: "Aceptar",
+        });
+    }
 });
+
+function popup( contenedor, status ) {
+	if ( status ) {
+		$( '#' + contenedor ).modal( 'show' );
+	} else {
+		$( '#' + contenedor ).modal( 'hide' );
+	}
+}
 
 //Editar Empleadoes
 $("#editEmpleado").on("show.bs.modal", function (event) {
@@ -188,25 +208,53 @@ $('#formEditEmpleado').submit(function (evt) {
     console.log("formEditEmpleado")
     evt.preventDefault();
     var formData = new FormData(this);
-
-    $.ajax({
-        type: 'POST',
-        url: "php/ActualizarEmpleado.php",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            console.log(data)
-            crear_notificacion_datatable(data, tableEmpleados)
-        },
-        error: function (data) {
-            swal({
-                title: 'Error',
-                text: 'Ocurrió un error en el servidor al tratar de actualizar el Empleado.',
-                icon: "error",
-                button: "Aceptar",
-            });
-        }
-    });
+    if ( validaRfc( $( '#ERFCE' ).val() ) ) {
+        $.ajax({
+            type: 'POST',
+            url: "php/ActualizarEmpleado.php",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                var info = JSON.parse( data );
+                crear_notificacion_datatable(data, tableEmpleados)
+                if ( info.code == '200' ) {
+                    popup( 'editEmpleado', false );
+                }
+            },
+            error: function (data) {
+                swal({
+                    title: 'Error',
+                    text: 'Ocurrió un error en el servidor al tratar de actualizar el Empleado.',
+                    icon: "error",
+                    button: "Aceptar",
+                });
+            }
+        });
+    } else {
+        swal({
+            title: 'RFC Invalido',
+            text: 'Favor de ingresar un RFC valido para continuar',
+            icon: "error",
+            button: "Aceptar",
+        });
+    }
 });
+function validaRfc( rfcStr ) {
+	var strCorrecta;
+	strCorrecta = rfcStr;	
+	if ( rfcStr.length == 12 ){
+	    var valid = '^(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+	} else {
+	    var valid = '^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+	}
+	var validRfc=new RegExp(valid);
+	var matchArray=strCorrecta.match(validRfc);
+	if ( matchArray==null ) {
+		return false;
+	} else {
+		return true;
+	}
+}

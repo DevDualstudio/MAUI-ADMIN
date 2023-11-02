@@ -6,27 +6,30 @@ class OrigenController
     /*=================================
      Agregar Origen
      ===================================*/
-    public static function ctrInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
+    public function ctrInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
     {
-        $answer = OrigenModel::mdlInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais);
+        $model = new OrigenModel();
+        $answer = $model->mdlInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais);
         return $answer;
     }
 
     /*=================================
       Muestra Origen Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarOrigen($Id)
+    public function ctrMostrarOrigen($Id)
     {
-        $answer = OrigenModel::mdlMostrarOrigen($Id);
+        $model = new OrigenModel();
+        $answer = $model->mdlMostrarOrigen($Id);
         return $answer;
     }
 
     /*=================================
       Muestra una lista de origenes
      ===================================*/
-    public static function ctrMostrarListaOrigenes()
+    public function ctrMostrarListaOrigenes()
     {
-        $answer = OrigenModel::mdlMostrarListaOrigenes();
+        $model = new OrigenModel();
+        $answer = $model->mdlMostrarListaOrigenes();
         return $answer;
     }
 
@@ -34,9 +37,10 @@ class OrigenController
     /*=================================
      Actualizar Origen
      ===================================*/
-    public static function ctrActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
+    public function ctrActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
     {
-        $answer = OrigenModel::mdlActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais);
+        $model = new OrigenModel();
+        $answer = $model->mdlActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais);
         return $answer;
     }
 }

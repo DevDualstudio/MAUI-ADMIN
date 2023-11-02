@@ -6,18 +6,20 @@ class LoginController
     /*=================================
      Hacer Login
      ===================================*/
-    public static function ctrUsuarios_Portal_credenciales($Email, $Password)
+    public function ctrUsuarios_Portal_credenciales($Email, $Password)
     {
-        $answer = LoginModel::mdlUsuarios_Portal_credenciales($Email, $Password);
+        $model = new LoginModel();
+        $answer = $model->mdlUsuarios_Portal_credenciales($Email, $Password);
         return $answer;
     }
 
     /*=================================
      Crear Session
      ===================================*/
-    public static function mdlSessionStart($jwt)
+    public function mdlSessionStart($jwt)
     {
-        $answer = LoginModel::mdlSessionStart($jwt);
+        $model = new LoginModel();
+        $answer = $model->mdlSessionStart($jwt);
         return $answer;
     }
 }

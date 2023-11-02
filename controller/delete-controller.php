@@ -5,9 +5,10 @@ class DeleteController
     /*=================================
      Elimina Registro
      ===================================*/
-    public static function ctrDeleteData($tabla, $campoID, $id)
+    public function ctrDeleteData($tabla, $campoID, $id)
     {
-        $answer = DeleteModel::mdlDeleteData($tabla, $campoID, $id);
+        $model = new DeleteModel();
+        $answer = $model->mdlDeleteData($tabla, $campoID, $id);
         return $answer;
     }
 }

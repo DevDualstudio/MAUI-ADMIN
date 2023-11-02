@@ -6,45 +6,50 @@ class UsuarioPortalController
     /*=================================
      Agregar UsuarioPortal
      ===================================*/
-    public static function ctrInsertarUsuarioPortal($Empleado, $Email, $Pass)
+    public function ctrInsertarUsuarioPortal($Empleado, $Email, $Pass)
     {
-        $answer = UsuarioPortalModel::mdlInsertarUsuarioPortal($Empleado, $Email, $Pass);
+        $model = new UsuarioPortalModel();
+        $answer = $model->mdlInsertarUsuarioPortal($Empleado, $Email, $Pass);
         return $answer;
     }
 
     /*=================================
       Muestra UsuarioPortal Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarUsuarioPortal($Id)
+    public function ctrMostrarUsuarioPortal($Id)
     {
-        $answer = UsuarioPortalModel::mdlMostrarUsuarioPortal($Id);
+        $model = new UsuarioPortalModel();
+        $answer = $model->mdlMostrarUsuarioPortal($Id);
         return $answer;
     }
 
     /*=================================
       Muestra Lista de UsuariosPortal
      ===================================*/
-    public static function ctrMostrarListaUsuariosPortal()
+    public function ctrMostrarListaUsuariosPortal()
     {
-        $answer = UsuarioPortalModel::mdlMostrarListaUsuariosPortal();
+        $model = new UsuarioPortalModel();
+        $answer = $model->mdlMostrarListaUsuariosPortal();
         return $answer;
     }
 
     /*=================================
      Actualizar UsuarioPortal
      ===================================*/
-    public static function ctrActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus)
+    public function ctrActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus)
     {
-        $answer = UsuarioPortalModel::mdlActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus);
+        $model = new UsuarioPortalModel();
+        $answer = $model->mdlActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus);
         return $answer;
     }
 
     /*=================================
      Actualizar contraseña del UsuarioPortal
      ===================================*/
-    public static function ctrActualizarPasswordUsuarioPortal($Id, $Pass)
+    public function ctrActualizarPasswordUsuarioPortal($Id, $Pass)
     {
-        $answer = UsuarioPortalModel::mdlActualizarPasswordUsuarioPortal($Id, $Pass);
+        $model = new UsuarioPortalModel();
+        $answer = $model->mdlActualizarPasswordUsuarioPortal($Id, $Pass);
         return $answer;
     }
 }

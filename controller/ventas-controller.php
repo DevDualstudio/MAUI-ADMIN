@@ -8,7 +8,8 @@ class VentaController
      ===================================*/
     public static function ctrInsertarVenta($Usuario, $Tipo, $Cliente, $Subtotal, $IVA, $Total)
     {
-        $answer = VentaModel::mdlInsertarVenta($Usuario, $Tipo, $Cliente, $Subtotal, $IVA, $Total);
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlInsertarVenta($Usuario, $Tipo, $Cliente, $Subtotal, $IVA, $Total);
         return $answer;
     }
 
@@ -17,7 +18,8 @@ class VentaController
      ===================================*/
     public static function ctrMostrarVenta($Id)
     {
-        $answer = VentaModel::mdlMostrarVenta($Id);
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlMostrarVenta($Id);
         return $answer;
     }
 
@@ -26,7 +28,8 @@ class VentaController
      ===================================*/
     public static function ctrMostrarListaVentas($select, $select2, $select3, $select4, $select5, $select6, $select7)
     {
-        $answer = VentaModel::mdlMostrarListaVentas($select, $select2, $select3, $select4, $select5, $select6, $select7);
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlMostrarListaVentas($select, $select2, $select3, $select4, $select5, $select6, $select7);
         return $answer;
     }
 
@@ -35,7 +38,8 @@ class VentaController
      ===================================*/
     public static function ctrMostrarListaVentas2()
     {
-        $answer = VentaModel::mdlMostrarListaVentas2();
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlMostrarListaVentas2();
         return $answer;
     }
     /*=================================
@@ -43,7 +47,8 @@ class VentaController
      ===================================*/
     public static function ctrMostrarListaTiposVenta()
     {
-        $answer = VentaModel::mdlMostrarListaTiposVenta();
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlMostrarListaTiposVenta();
         return $answer;
     }
 
@@ -52,7 +57,8 @@ class VentaController
      ===================================*/
     public static function ctrActualizarVenta($Id, $Subtotal, $IVA, $Total)
     {
-        $answer = VentaModel::mdlActualizarVenta($Id, $Subtotal, $IVA, $Total);
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlActualizarVenta($Id, $Subtotal, $IVA, $Total);
         return $answer;
     }
 
@@ -61,7 +67,8 @@ class VentaController
      ===================================*/
     public static function ctrVentaCancelada($Id)
     {
-        $answer = VentaModel::mdlVentaCancelada($Id);
+        $ventaModel = new VentaModel();
+        $answer =$ventaModel->mdlVentaCancelada($Id);
         return $answer;
     }
 }

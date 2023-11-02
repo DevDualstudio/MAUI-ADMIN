@@ -11,13 +11,13 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Número Empleado (Obligatorio)</label>
-                                <input type="text" class="form-control" name="NEmpleadoE" id="NEmpleadoE">
+                                <input type="text" class="form-control" name="NEmpleadoE" id="NEmpleadoE" required>
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <div class="form-group">
                                 <label>Nombre (Obligatorio)</label>
-                                <input type="text" class="form-control" name="NombreE" id="NombreE">
+                                <input type="text" class="form-control" name="NombreE" id="NombreE" required>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Email (Obligatorio)</label>
-                                <input type="text" class="form-control" name="EmailE" id="EmailE">
+                                <input type="email" class="form-control" name="EmailE" id="EmailE" required>
                             </div>
                         </div>
                     </div>
@@ -90,19 +90,19 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>CURP (Obligatorio)</label>
-                                <input type="text" class="form-control" name="CURPE" id="CURPE">
+                                <input type="text" class="form-control" name="CURPE" id="CURPE" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>RFC (Obligatorio)</label>
-                                <input type="text" class="form-control" name="RFCE" id="RFCE">
+                                <input type="text" class="form-control" name="RFCE" id="RFCE" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>NSS (Obligatorio)</label>
-                                <input type="text" class="form-control" name="NSSE" id="NSSE">
+                                <input type="text" class="form-control" name="NSSE" id="NSSE" required>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Puesto (Obligatorio)</label>
-                                <select name="PuestoE" id="PuestoE" class="form-control"></select>
+                                <select name="PuestoE" id="PuestoE" class="form-control" required></select>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -143,7 +143,7 @@
                     <button type="button" class="btn btn-msecondary-100 text-light" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <input type="submit" class="btn btn-mprimary-100 text-light" data-bs-dismiss="modal" value="Registrar">
+                    <input type="submit" class="btn btn-mprimary-100 text-light" value="Registrar">
                 </div>
             </div>
         </form>

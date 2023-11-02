@@ -4,15 +4,17 @@ require_once "connection.php";
 
 class LoginModel
 {
+    public function __construct() {}
     //Permite Hacer Login
-    public static function mdlUsuarios_Portal_credenciales($Email, $Password)
+    public function mdlUsuarios_Portal_credenciales($Email, $Password)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call Usuarios_Portal_credenciales('$Email','$Password');";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $Estatus = $row['Respuesta'];
             if ($Estatus == 'Acceso Permitido') {
                 $respuesta['code'] = '200';
@@ -31,16 +33,17 @@ class LoginModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el inicio de sesión falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
             $respuesta['status'] = false;
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     /*=================================
      Creamos la Sesion
      ===================================*/
-    public static function mdlSessionStart($jwt)
+    public function mdlSessionStart($jwt)
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();

@@ -4,14 +4,16 @@ require_once "connection.php";
 
 class GuiaModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Guia
-    public static function mdlInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta)
+    public function mdlInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarGuia($Cliente, $Origen, $Destino, '$Descripcion', $Chofer, $Vehiculo, '', '$FechaExpiracion', $Venta);";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $id_nuevo = $row['Respuesta'];
 
             $respuesta['code'] = '200';
@@ -23,20 +25,22 @@ class GuiaModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro de la Guia falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar un Guia
-    public static function mdlMostrarGuia($Id)
+    public function mdlMostrarGuia($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaGuias WHERE IdGuia=$Id;";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -49,18 +53,20 @@ class GuiaModel
             $respuesta['description'] = "No se pudo encontrar la Guia.";
             $respuesta['detail'] = "No se encontró la Guia";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
 
     //Permite Mostrar la fecha de una Guia
-    public static function mdlMostrarFechaGuia($Id)
+    public function mdlMostrarFechaGuia($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaHistorialGuia WHERE Guia = $Id AND IDEstatus = 1;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -73,11 +79,12 @@ class GuiaModel
             $respuesta['description'] = "No se pudo encontrar el estatus de la Guia.";
             $respuesta['detail'] = "No se encontró la Guia";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Guias
-    public static function mdlMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus)
+    public function mdlMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus)
     {
         if ($estatus == 0) {
             $wherestatus = " WHERE IdEstatus IN(1,2,3,4,5,6,7,8,9) ";
@@ -114,11 +121,12 @@ class GuiaModel
                 break;
         }
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaGuias $wherestatus $where;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -127,18 +135,20 @@ class GuiaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Guias Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Mostrar tipos de Guia
-    public static function mdlMostrarListaEstatusGuia()
+    public function mdlMostrarListaEstatusGuia()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT Id AS Id, Descripcion AS Nombre FROM MAUI.ListaEstatusGuia;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -147,18 +157,20 @@ class GuiaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Tipos de Guia Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Mostrar tipos de Guia
-    public static function mdlMostrarListaHistorialGuia($Id)
+    public function mdlMostrarListaHistorialGuia($Id)
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaHistorialGuia WHERE Guia = $Id;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -167,18 +179,20 @@ class GuiaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Tipos de Guia Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
 
     //-- Permite Actualizar una Guia Registrada
 
-    public static function mdlActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus)
+    public function mdlActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarGuia($Id, $Cliente, $Origen, $Destino, '$Descripcion', $Chofer, $Vehiculo, '', '$FechaExpiracion', $Estatus);";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -188,8 +202,9 @@ class GuiaModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar la Guia.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

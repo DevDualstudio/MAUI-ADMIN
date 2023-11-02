@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class OrigenModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Origen
-    public static function mdlInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
+    public function mdlInsertarOrigen($Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarOrigen('$Nombre','$Direccion','$Colonia','$CP','$Ciudad','$Estado','$Pais');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
 
             $respuesta['code'] = '200';
@@ -21,20 +23,22 @@ class OrigenModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro del Origen falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar un Origen
-    public static function mdlMostrarOrigen($Id)
+    public function mdlMostrarOrigen($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarOrigen('$Id');";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -48,18 +52,20 @@ class OrigenModel
             $respuesta['description'] = "No se pudo encontrar el Origen.";
             $respuesta['detail'] = "No se encontró el Origen";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Origenes
-    public static function mdlMostrarListaOrigenes()
+    public function mdlMostrarListaOrigenes()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarListaOrigenes();";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -68,17 +74,19 @@ class OrigenModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Origenes Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar un Origen Registrado
 
-    public static function mdlActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
+    public function mdlActualizarOrigen($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarOrigen('$Id','$Nombre','$Direccion','$Colonia','$CP','$Ciudad','$Estado','$Pais');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -88,8 +96,9 @@ class OrigenModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el Origen.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

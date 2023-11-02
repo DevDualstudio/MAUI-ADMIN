@@ -13,7 +13,9 @@ function crear_swal_then(data, pagina) {
             dangerMode: true,
             icon: "success"
         }).then(function () {
-            window.location.href = pagina;
+            if ( pagina != '' ) {
+                window.location.href = pagina;
+            }
         });
     }
 

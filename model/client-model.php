@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class ClientModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Cliente
-    public static function mdlInsertClienteNoRegistrado($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $RFC, $Email)
+    public function mdlInsertClienteNoRegistrado($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $RFC, $Email)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarClienteNoRegistrado('$Nombre','$Domicilio','$Colonia','$CP','$Ciudad','$Estado','$Pais', '$Telefono','$Celular','$RFC','$Email');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
 
             $respuesta['code'] = '200';
@@ -21,20 +23,22 @@ class ClientModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro del cliente falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar un Cliente
-    public static function mdlMostrarCliente($Id)
+    public function mdlMostrarCliente($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarCliente('$Id');";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -48,18 +52,20 @@ class ClientModel
             $respuesta['description'] = "No se pudo encontrar el cliente.";
             $respuesta['detail'] = "No se encontró el Cliente";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Clientes
-    public static function mdlMostrarListaClientes()
+    public function mdlMostrarListaClientes()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarListaClientes();";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -68,17 +74,19 @@ class ClientModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Clientes Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar un Cliente Registrado
 
-    public static function mdlActualizarClienteNoRegistrado($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $RFC, $Email, $Estatus)
+    public function mdlActualizarClienteNoRegistrado($Id, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $RFC, $Email, $Estatus)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarClienteNoRegistrado('$Id','$Nombre','$Direccion','$Colonia','$CP','$Ciudad','$Estado','$Pais', '$Telefono','$Celular','$RFC','$Email','$Estatus');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -88,8 +96,9 @@ class ClientModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el cliente.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

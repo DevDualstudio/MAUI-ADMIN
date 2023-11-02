@@ -6,36 +6,40 @@ class EmpleadoController
     /*=================================
      Agregar Empleado
      ===================================*/
-    public static function ctrInsertarEmpleado($NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen)
+    public function ctrInsertarEmpleado($NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen)
     {
-        $answer = EmpleadoModel::mdlInsertarEmpleado($NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen);
+        $model = new EmpleadoModel();
+        $answer = $model->mdlInsertarEmpleado($NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen);
         return $answer;
     }
 
     /*=================================
       Muestra Empleado Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarEmpleado($Id)
+    public function ctrMostrarEmpleado($Id)
     {
-        $answer = EmpleadoModel::mdlMostrarEmpleado($Id);
+        $model = new EmpleadoModel();
+        $answer = $model->mdlMostrarEmpleado($Id);
         return $answer;
     }
 
     /*=================================
       Muestra Lista de Empleados
      ===================================*/
-    public static function ctrMostrarListaEmpleados()
+    public function ctrMostrarListaEmpleados()
     {
-        $answer = EmpleadoModel::mdlMostrarListaEmpleados();
+        $model = new EmpleadoModel();
+        $answer = $model->mdlMostrarListaEmpleados();
         return $answer;
     }
 
     /*=================================
      Actualizar Empleado
      ===================================*/
-    public static function ctrActualizarEmpleado($Id, $NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen, $Estatus)
+    public function ctrActualizarEmpleado($Id, $NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen, $Estatus)
     {
-        $answer = EmpleadoModel::mdlActualizarEmpleado($Id, $NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen, $Estatus);
+        $model = new EmpleadoModel();
+        $answer = $model->mdlActualizarEmpleado($Id, $NEmpleado, $Nombre, $Direccion, $Colonia, $CP, $Ciudad, $Estado, $Pais, $Telefono, $Celular, $CURP, $RFC, $NSS, $NLicencia, $Puesto, $Email, $Vigencia, $Imagen, $Estatus);
         return $answer;
     }
 }

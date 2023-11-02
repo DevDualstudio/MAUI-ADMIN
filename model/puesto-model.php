@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class PuestoModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Puesto
-    public static function mdlInsertarPuestos($Nombre, $Descripcion, $AA, $AS, $AU, $WA, $WS, $WU)
+    public function mdlInsertarPuestos($Nombre, $Descripcion, $AA, $AS, $AU, $WA, $WS, $WU)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarPuestos('$Nombre','$Descripcion',$AA,$AS,$AU,$WA,$WS,$WU);";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
 
             $respuesta['code'] = '200';
@@ -21,20 +23,22 @@ class PuestoModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro del puesto falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite  Mostrar un Puesto
-    public static function mdlMostrarPuesto($Id)
+    public function mdlMostrarPuesto($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarPuesto('$Id');";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -48,18 +52,20 @@ class PuestoModel
             $respuesta['description'] = "No se pudo encontrar el Puesto.";
             $respuesta['detail'] = "No se encontró el Puesto";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Puestos
-    public static function mdlMostrarListaPuestos()
+    public function mdlMostrarListaPuestos()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarListaPuestos();";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -68,16 +74,18 @@ class PuestoModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Puestos Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar un Puesto Registrado
-    public static function mdlActualizarPuestos($Id, $Nombre, $Descripcion, $AA, $AS, $AU, $WA, $WS, $WU)
+    public function mdlActualizarPuestos($Id, $Nombre, $Descripcion, $AA, $AS, $AU, $WA, $WS, $WU)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarPuestos('$Id','$Nombre','$Descripcion',$AA,$AS,$AU,$WA,$WS,$WU);";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -87,8 +95,9 @@ class PuestoModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el Puesto.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

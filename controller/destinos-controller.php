@@ -6,36 +6,40 @@ class DestinoController
     /*=================================
      Agregar Destino
      ===================================*/
-    public static function ctrInsertarDestino($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente)
+    public function ctrInsertarDestino($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente)
     {
-        $answer = DestinoModel::mdlInsertarDestino($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente);
+        $model = new DestinoModel();
+        $answer = $model->mdlInsertarDestino($Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente);
         return $answer;
     }
 
     /*=================================
       Muestra Destino Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarDestino($Id)
+    public function ctrMostrarDestino($Id)
     {
-        $answer = DestinoModel::mdlMostrarDestino($Id);
+        $model = new DestinoModel();
+        $answer = $model->mdlMostrarDestino($Id);
         return $answer;
     }
 
     /*=================================
       Muestra Destino Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarListaDestinos()
+    public function ctrMostrarListaDestinos()
     {
-        $answer = DestinoModel::mdlMostrarListaDestinos();
+        $model = new DestinoModel();
+        $answer = $model->mdlMostrarListaDestinos();
         return $answer;
     }
 
     /*=================================
      Actualizar Destino
      ===================================*/
-    public static function ctrActualizarDestino($Id, $Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente)
+    public function ctrActualizarDestino($Id, $Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente)
     {
-        $answer = DestinoModel::mdlActualizarDestino($Id, $Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente);
+        $model = new DestinoModel();
+        $answer = $model->mdlActualizarDestino($Id, $Nombre, $Domicilio, $Colonia, $CP, $Ciudad, $Estado, $Pais, $IdCliente);
         return $answer;
     }
 }

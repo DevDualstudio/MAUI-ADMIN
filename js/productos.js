@@ -42,7 +42,7 @@ function eliminaRegistro(valorId) {
 			$.ajax({
                 type: "POST",
                 url: "php/EliminaRegistro.php",
-                data: { 'Id': valorId, 'Tabla': 'productos', 'CampoID': 'pro_id' },
+                data: { 'Id': valorId, 'Tabla': 'Productos', 'CampoID': 'pro_id' },
                 success: function (data) {
                     var json = JSON.parse(data);
                     const code = parseInt(json["code"]);

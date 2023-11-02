@@ -100,7 +100,7 @@
                     <button type="button" class="btn btn-msecondary-100 text-light" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <input type="submit" class="btn btn-mprimary-100 text-light" data-bs-dismiss="modal" value="Registrar">
+                    <input type="submit" class="btn btn-mprimary-100 text-light" value="Registrar">
                 </div>
             </div>
         </form>

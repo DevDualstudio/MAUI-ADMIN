@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class VentaModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Venta
-    public static function mdlInsertarVenta($Usuario, $Tipo, $Cliente, $Subtotal, $IVA, $Total)
+    public function mdlInsertarVenta($Usuario, $Tipo, $Cliente, $Subtotal, $IVA, $Total)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarVentas($Usuario,$Tipo,$Cliente,$Subtotal,$IVA,$Total);";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
 
             $respuesta['code'] = '200';
@@ -21,20 +23,22 @@ class VentaModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro de la Venta falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar un Venta
-    public static function mdlMostrarVenta($Id)
+    public function mdlMostrarVenta($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaVentas WHERE Id=$Id;";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -48,11 +52,12 @@ class VentaModel
             $respuesta['description'] = "No se pudo encontrar el Venta.";
             $respuesta['detail'] = "No se encontró el Venta";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Ventas
-    public static function mdlMostrarListaVentas($select, $select2, $select3, $select4, $select5, $select6, $select7)
+    public function mdlMostrarListaVentas($select, $select2, $select3, $select4, $select5, $select6, $select7)
     {
         $where = "";
         switch ($select) {
@@ -76,11 +81,12 @@ class VentaModel
                 break;
         }
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaVentas $where;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -89,17 +95,19 @@ class VentaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Ventas Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
     //-- Mostrar ventas 2
-    public static function mdlMostrarListaVentas2()
+    public function mdlMostrarListaVentas2()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaVentas;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -108,17 +116,19 @@ class VentaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Tipos de Venta Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
     //-- Mostrar tipos de venta
-    public static function mdlMostrarListaTiposVenta()
+    public function mdlMostrarListaTiposVenta()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT tv_id AS Id, tv_nombre AS Nombre FROM TipoVenta;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -127,17 +137,19 @@ class VentaModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Tipos de Venta Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar una Venta Registrado
 
-    public static function mdlActualizarVenta($Id, $Subtotal, $IVA, $Total)
+    public function mdlActualizarVenta($Id, $Subtotal, $IVA, $Total)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarVentas($Id, $Subtotal,$IVA,$Total);";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -147,19 +159,21 @@ class VentaModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar la Venta.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Cancelar una Venta Registrado
 
-    public static function mdlVentaCancelada($Id)
+    public function mdlVentaCancelada($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = " call VentaCancelada($Id,'Cancelada','Cancelada por Administrador');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -169,8 +183,9 @@ class VentaModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo cancelar la Venta.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

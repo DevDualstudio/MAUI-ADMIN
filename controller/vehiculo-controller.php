@@ -6,36 +6,40 @@ class VehiculoController
     /*=================================
      Agregar Vehiculo
      ===================================*/
-    public static function ctrInsertarVehiculos($Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer)
+    public function ctrInsertarVehiculos($Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer)
     {
-        $answer = VehiculoModel::mdlInsertarVehiculos($Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer);
+        $model = new VehiculoModel();
+        $answer = $model->mdlInsertarVehiculos($Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer);
         return $answer;
     }
 
     /*=================================
       Muestra Vehiculo Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarVehiculo($Id)
+    public function ctrMostrarVehiculo($Id)
     {
-        $answer = VehiculoModel::mdlMostrarVehiculo($Id);
+        $model = new VehiculoModel();
+        $answer = $model->mdlMostrarVehiculo($Id);
         return $answer;
     }
 
     /*=================================
       Muestra Listado de Vehiculos
      ===================================*/
-    public static function ctrMostrarListaVehiculos()
+    public function ctrMostrarListaVehiculos()
     {
-        $answer = VehiculoModel::mdlMostrarListaVehiculos();
+        $model = new VehiculoModel();
+        $answer = $model->mdlMostrarListaVehiculos();
         return $answer;
     }
 
     /*=================================
      Actualizar Vehiculo
      ===================================*/
-    public static function ctrActualizarVehiculos($Id, $Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer, $Estatus)
+    public function ctrActualizarVehiculos($Id, $Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer, $Estatus)
     {
-        $answer = VehiculoModel::mdlActualizarVehiculos($Id, $Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer, $Estatus);
+        $model = new VehiculoModel();
+        $answer = $model->mdlActualizarVehiculos($Id, $Placas, $NSerie, $Marca, $Modelo, $Year, $Tipo, $Chofer, $Estatus);
         return $answer;
     }
 }

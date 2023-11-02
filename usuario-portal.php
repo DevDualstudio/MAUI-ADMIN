@@ -61,7 +61,7 @@
                             </div>
                         </form>
 
-                        <li class="nav-item dropdown mx-2" style="">
+                       <!--  <li class="nav-item dropdown mx-2" style="">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-bell fa-lg mt-3 text-mprimary-100"></i>
                                 <span class="badge rounded-pill badge-notification bg-danger">1</span>
@@ -71,7 +71,7 @@
                                 <li><a class="dropdown-item" href="#">Notificación #2</a></li>
                                 <li><a class="dropdown-item" href="#">Notificación #3</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
 
                         <li class="nav-item dropdown mx-2">
@@ -79,9 +79,9 @@
                                 <img src="assets/avatars/Active Men.png" class="img-fluid rounded-circle avatar mr-2 bg-mprimary-030" alt="Avatar">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <!-- <a class="dropdown-item" href="#">Mi perfil</a>
                                 <a class="dropdown-item" href="#">Configuración</a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="login.php">Cerrar sesión</a>
                             </ul>
                         </li>
@@ -166,7 +166,7 @@
     <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
 
     <!--  Usuarios Portal -->
-    <script src="js/usuarios_portal.js"></script>
+    <script src="js/usuarios_portal.js?v=1"></script>
     <script src="js/datatables/datatable_usuarios_portal.js"></script>
     <script src="js/notificaciones.js"></script>
 </body>

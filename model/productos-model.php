@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class ProductoModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo Producto
-    public static function mdlInsertarProducto($Nombre, $DescripPr, $ExpiracionPr, $PrecioPr, $Imagen1, $Imagen2, $Imagen3, $Imagen4, $Imagen5)
+    public function mdlInsertarProducto($Nombre, $DescripPr, $ExpiracionPr, $PrecioPr, $Imagen1, $Imagen2, $Imagen3, $Imagen4, $Imagen5)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+        $con->OpenConnection();
         $sql = "call InsertarProductos('$Nombre','$DescripPr','$ExpiracionPr','$PrecioPr','$Imagen1','$Imagen2','$Imagen3', '$Imagen4','$Imagen5');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -20,20 +22,22 @@ class ProductoModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro del Producto falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar un Producto
-    public static function mdlMostrarProducto($Id)
+    public function mdlMostrarProducto($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call MostrarProducto('$Id');";
 
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -45,18 +49,20 @@ class ProductoModel
             $respuesta['description'] = "No se pudo encontrar el Producto.";
             $respuesta['detail'] = "No se encontró el Producto";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de Productos
-    public static function mdlMostrarListaProductos()
+    public function mdlMostrarListaProductos()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+        $con->OpenConnection();
         $sql = "call MostrarListaProductos();";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -65,17 +71,20 @@ class ProductoModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Productos Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar un Producto Registrado
 
-    public static function mdlActualizarProducto($Id, $Nombre, $DescripPr, $ExpiracionPr, $PrecioPr, $Imagen1, $Imagen2, $Imagen3, $Imagen4, $Imagen5, $Estatus)
+    public function mdlActualizarProducto($Id, $Nombre, $DescripPr, $ExpiracionPr, $PrecioPr, $Imagen1, $Imagen2, $Imagen3, $Imagen4, $Imagen5, $Estatus)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarProductos('$Id', '$Nombre','$DescripPr','$ExpiracionPr','$PrecioPr','$Imagen1','$Imagen2','$Imagen3','$Imagen4','$Imagen5','$Estatus');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -85,8 +94,9 @@ class ProductoModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el Producto.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

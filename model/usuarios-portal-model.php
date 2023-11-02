@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class UsuarioPortalModel
 {
+    public function __construct() {}
     //Permite Registrar un Nuevo UsuarioPortal
-    public static function mdlInsertarUsuarioPortal($Empleado, $Email, $Pass)
+    public function mdlInsertarUsuarioPortal($Empleado, $Email, $Pass)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call InsertarUsuarioPortal($Empleado,'$Email', '$Pass');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -20,19 +22,21 @@ class UsuarioPortalModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, el registro del Usuario Portal falló. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite  Mostrar un UsuarioPortal
-    public static function mdlMostrarUsuarioPortal($Id)
+    public function mdlMostrarUsuarioPortal($Id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaUsuariosPortal WHERE Id =$Id;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            $row = $con->Resultados( $result );
             $data = $row;
 
             $respuesta['code'] = '200';
@@ -46,18 +50,20 @@ class UsuarioPortalModel
             $respuesta['description'] = "No se pudo encontrar el Usuario Portal.";
             $respuesta['detail'] = "No se encontró el UsuarioPortal";
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //Permite Mostrar la Lista de UsuarioPortals
-    public static function mdlMostrarListaUsuariosPortal()
+    public function mdlMostrarListaUsuariosPortal()
     {
         $filas = array();
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "SELECT * FROM ListaUsuariosPortal;";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        $result = $con->Consulta($sql);
+        if ($con->Cuantos( $result ) > 0) {
+            while ($row = $con->Resultados( $result )) {
                 $filas[] = $row;
             }
         }
@@ -66,17 +72,19 @@ class UsuarioPortalModel
         $respuesta['message'] = 'OK';
         $respuesta['description'] = 'Usuarios del Portal Encontrados Exitosamente.';
         $respuesta['data'] = $filas;
+        $con->CierraConexion();
         return $respuesta;
     }
 
     //-- Permite Actualizar un UsuarioPortal Registrado
 
-    public static function mdlActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus)
+    public function mdlActualizarUsuarioPortal($Id, $Empleado, $Email, $Estatus)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarUsuariosPortal($Id,$Empleado,'$Email','$Estatus');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -86,17 +94,19 @@ class UsuarioPortalModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el Usuario Portal.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 
-    public static function mdlActualizarPasswordUsuarioPortal($Id, $Pass)
+    public function mdlActualizarPasswordUsuarioPortal($Id, $Pass)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+         $con->OpenConnection();
         $sql = "call ActualizarPasswordUsuarioPortal($Id,'$Pass');";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
             $respuesta['code'] = '200';
             $respuesta['message'] = 'OK';
@@ -105,8 +115,9 @@ class UsuarioPortalModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "No se pudo actualizar el Usuario Portal.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

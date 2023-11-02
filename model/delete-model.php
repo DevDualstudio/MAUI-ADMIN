@@ -4,13 +4,15 @@ require_once "connection.php";
 
 class DeleteModel
 {
+    public function __construct() {}
     //Permite Eliminar un Registro
-    public static function mdlDeleteData($tabla, $campoID, $id)
+    public function mdlDeleteData($tabla, $campoID, $id)
     {
-        $connection =  MauiConnection::MauiConn();
+        $con =  new MauiConnection();
+        $con->OpenConnection();
         $sql = "delete from $tabla where $campoID = $id;";
 
-        $query = mysqli_query($connection, $sql);
+       $query = $con->Consulta($sql);
         if ($query) {
 
             $respuesta['code'] = '200';
@@ -20,8 +22,9 @@ class DeleteModel
             $respuesta['code'] = '400';
             $respuesta['message'] = 'BAD REQUEST';
             $respuesta['description'] = "Lo sentimos, la eliminación de este registro fallo. Por favor vuelva a intentarlo.";
-            $respuesta['detail'] = "Error SQL: " . $connection->error;
+            $respuesta['detail'] = "Error SQL: " . $con->MuestraError();
         }
+        $con->CierraConexion();
         return $respuesta;
     }
 }

@@ -1,8 +1,3 @@
-function validaRFC( rfc ) {
-    const re = /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
-    var validado = rfc.match(re);
-    return validado;
-}
 //Buscar Clientes
 function listado_clientes() {
     $.ajax({
@@ -42,7 +37,7 @@ function eliminaRegistro(valorId) {
 			$.ajax({
                 type: "POST",
                 url: "php/EliminaRegistro.php",
-                data: { 'Id': valorId, 'Tabla': 'clientes', 'CampoID': 'cli_id' },
+                data: { 'Id': valorId, 'Tabla': 'Clientes', 'CampoID': 'cli_id' },
                 success: function (data) {
                     var json = JSON.parse(data);
                     const code = parseInt(json["code"]);
@@ -81,28 +76,45 @@ $("#insertCliente").on("show.bs.modal", function (event) {
 $('#formInsertCliente').submit(function (evt) {
     evt.preventDefault();
     var formData = new FormData(this);
-
-    $.ajax({
-        type: 'POST',
-        url: "php/insertClienteNoRegistrado.php",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            console.log(data)
-            crear_notificacion_datatable(data, tableClientes)
-        },
-        error: function (data) {
-            swal({
-                title: 'Error',
-                text: 'Ocurrió un error en el servidor al tratar de crear el cliente.',
-                icon: "error",
-                button: "Aceptar",
-            });
-        }
-    });
+    if ( validaRfc( $( '#RFC' ).val() ) ) {
+        $.ajax({
+            type: 'POST',
+            url: "php/insertClienteNoRegistrado.php",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                crear_notificacion_datatable(data, tableClientes);
+                popup( 'insertCliente', false );
+            },
+            error: function (data) {
+                swal({
+                    title: 'Error',
+                    text: 'Ocurrió un error en el servidor al tratar de crear el cliente.',
+                    icon: "error",
+                    button: "Aceptar",
+                });
+            }
+        });
+    } else {
+        swal({
+            title: 'RFC Invalido',
+            text: 'Favor de ingresar un RFC valido para continuar',
+            icon: "error",
+            button: "Aceptar",
+        });
+    }
 });
+
+function popup( contenedor, status ) {
+	if ( status ) {
+		$( '#' + contenedor ).modal( 'show' );
+	} else {
+		$( '#' + contenedor ).modal( 'hide' );
+	}
+}
 
 //Editar Clientes
 $("#editCliente").on("show.bs.modal", function (event) {
@@ -151,25 +163,51 @@ $("#editCliente").on("show.bs.modal", function (event) {
 $('#formEditCliente').submit(function (evt) {
     evt.preventDefault();
     var formData = new FormData(this);
-
-    $.ajax({
-        type: 'POST',
-        url: "php/ActualizarClienteNoRegistrado.php",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            console.log(data)
-            crear_notificacion_datatable(data, tableClientes)
-        },
-        error: function (data) {
-            swal({
-                title: 'Error',
-                text: 'Ocurrió un error en el servidor al tratar de actualizar el cliente.',
-                icon: "error",
-                button: "Aceptar",
-            });
-        }
-    });
+    if ( validaRfc( $( '#ERFC' ).val() ) ) {
+        $.ajax({
+            type: 'POST',
+            url: "php/ActualizarClienteNoRegistrado.php",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                crear_notificacion_datatable(data, tableClientes);
+                popup( 'editCliente', false );
+            },
+            error: function (data) {
+                swal({
+                    title: 'Error',
+                    text: 'Ocurrió un error en el servidor al tratar de actualizar el cliente.',
+                    icon: "error",
+                    button: "Aceptar",
+                });
+            }
+        });
+    } else {
+        swal({
+            title: 'RFC Invalido',
+            text: 'Favor de ingresar un RFC valido para continuar',
+            icon: "error",
+            button: "Aceptar",
+        });
+    }
 });
+
+function validaRfc( rfcStr ) {
+	var strCorrecta;
+	strCorrecta = rfcStr;	
+	if ( rfcStr.length == 12 ){
+	    var valid = '^(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+	} else {
+	    var valid = '^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+	}
+	var validRfc=new RegExp(valid);
+	var matchArray=strCorrecta.match(validRfc);
+	if ( matchArray==null ) {
+		return false;
+	} else {
+		return true;
+	}
+}

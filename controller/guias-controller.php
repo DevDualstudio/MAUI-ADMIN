@@ -6,63 +6,97 @@ class GuiaController
     /*=================================
      Agregar Guia
      ===================================*/
-    public static function ctrInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta)
+    public function ctrInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta)
     {
-        $answer = GuiaModel::mdlInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta);
+        $model = new GuiaModel();
+        $answer = $model->mdlInsertarGuia($Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Venta);
         return $answer;
     }
 
     /*=================================
       Muestra Guia Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarGuia($Id)
+    public function ctrMostrarGuia($Id)
     {
-        $answer = GuiaModel::mdlMostrarGuia($Id);
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarGuia($Id);
+        return $answer;
+    }
+
+    public function ctrMostrarManifiesto($Id)
+    {
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarManifiesto($Id);
         return $answer;
     }
 
     /*=================================
       Muestra la fecha de una Guia Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarFechaGuia($Id)
+    public function ctrMostrarFechaGuia($Id)
     {
-        $answer = GuiaModel::mdlMostrarFechaGuia($Id);
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarFechaGuia($Id);
         return $answer;
     }
+
+    /*=================================
+     Agregar MAnifiesto
+     ===================================*/
+     public function ctrInsertarManifiesto($Chofer, $Status, $Guias)
+     {
+         $model = new GuiaModel();
+        $answer = $model->mdlInsertarManifiesto($Chofer, $Status, $Guias);
+         return $answer;
+     }
 
     /*=================================
       Muestra Guia Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus)
+    public function ctrMostrarListaManifiestos()
     {
-        $answer = GuiaModel::mdlMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus);
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarListaManifiestos();
         return $answer;
     }
 
     /*=================================
+      Muestra Guias Libres
+     ===================================*/
+     public function ctrMostrarGuiasLibres()
+     {
+         $model = new GuiaModel();
+        $answer = $model->mdlMostrarGuiasLibres();
+         return $answer;
+     }
+
+    /*=================================
       Muestra Estatus de Guia Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarListaEstatusGuia()
+    public function ctrMostrarListaEstatusGuia()
     {
-        $answer = GuiaModel::mdlMostrarListaEstatusGuia();
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarListaEstatusGuia();
         return $answer;
     }
 
     /*=================================
       Muestra Todos los Estatus de Guia Especifico a partir de Id 
      ===================================*/
-    public static function ctrMostrarListaHistorialGuia($Id)
+    public function ctrMostrarListaHistorialGuia($Id)
     {
-        $answer = GuiaModel::mdlMostrarListaHistorialGuia($Id);
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarListaHistorialGuia($Id);
         return $answer;
     }
 
     /*=================================
      Actualizar Guia
      ===================================*/
-    public static function ctrActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus)
+    public function ctrActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus)
     {
-        $answer = GuiaModel::mdlActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus);
+        $model = new GuiaModel();
+        $answer = $model->mdlActualizarGuia($Id, $Cliente, $Origen, $Destino, $Descripcion, $Chofer, $Vehiculo, $FechaExpiracion, $Estatus);
         return $answer;
     }
 }
