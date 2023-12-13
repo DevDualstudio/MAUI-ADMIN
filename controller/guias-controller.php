@@ -23,6 +23,13 @@ class GuiaController
         return $answer;
     }
 
+    public static function ctrMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus)
+    {
+        $model = new GuiaModel();
+        $answer = $model->mdlMostrarListaGuias($select, $select2, $select3, $select4, $select5, $select6, $select8, $select9, $estatus);
+        return $answer;
+    }
+
     public function ctrMostrarManifiesto($Id)
     {
         $model = new GuiaModel();
