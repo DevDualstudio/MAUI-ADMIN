@@ -7,10 +7,10 @@ class MauiConnection
 	private $user;
 	private $pass;
 	public function __construct() {
-		$this->server='localhost';
+		$this->server='maui-database.cv7x0hw15acc.us-east-2.rds.amazonaws.com';
 		$this->user = 'root';
-		$this->pass = '';
-		$this->database = 'maui';
+		$this->pass = 'BDDMySQL.L8M4utg8302YpdRZ6b9O.MAUI2022';
+		$this->database = 'MAUI';
 		$this->conexion = mysqli_connect( $this->server, $this->user, $this->pass, $this->database );
 	}
 	public function OpenConnection()

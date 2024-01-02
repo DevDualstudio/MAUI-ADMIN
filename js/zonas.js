@@ -8,8 +8,7 @@ $( document ).ready( function() {
             'tarifaId': $( '#tarifaId' ).val(),
             'origen': $( '#origen' ).val(),
             'destino': $( '#destino' ).val(),
-            'precioPeso': $( '#precioPeso' ).val(),
-            'precioVolumen': $( '#precioVolumen' ).val()
+            'distancia': $( '#distancia' ).val(),
         };
         if ( $( '#origen' ).val() != $( '#destino' ).val() ) {
             var accion = ( $( '#tarifaId' ).val() == 0 ) ? 'Inserta' : 'Actualiza';

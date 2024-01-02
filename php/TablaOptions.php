@@ -1,4 +1,5 @@
 <?php
+header( 'Access-Control-Allow-Origin: *' );
 include '../controller/general-controller.php';
 $mdl = new GeneralController;
 $tabla = $_REQUEST['tabla'];

@@ -29,6 +29,6 @@ if ($respuesta['code'] == 200) {
     $decoded = JWT::decode($jwt, $key, array('HS256'));
     $decoded_array = (array) $decoded;
     JWT::$leeway = 60; // $leeway in seconds
-    $session = LoginController::mdlSessionStart($jwt);
+    $session = $mdl->mdlSessionStart($jwt);
 }
 echo json_encode($respuesta);

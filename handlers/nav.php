@@ -25,9 +25,6 @@
         <a href="ventas.php" class="list-group-item list-group-item-action bg-transparent text-light">
             <img class="icon mx-2" src="assets/icons/boxes.png" alt="Ventas">
             Ventas</a>
-        <a href="zonas.php" class="list-group-item list-group-item-action bg-transparent text-light">
-            <img class="icon mx-2" src="assets/icons/iconos-barra-12.png" alt="Zonas">
-            Zonas de entrega</a>
         <a href="tarifario.php" class="list-group-item list-group-item-action bg-transparent text-light">
             <img class="icon mx-2" src="assets/icons/iconos-barra-12.png" alt="Tarifario">
             Tarifario</a>

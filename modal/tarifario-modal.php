@@ -39,16 +39,10 @@
                         </div>
                     </div>
                     <div class="row my-2">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
-                                <label>Precio Peso</label>
-                                <input type="text" class="form-control" name="precioPeso" id="precioPeso" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Precio Volumen</label>
-                                <input type="text" class="form-control" name="precioVolumen" id="precioVolumen" required>
+                                <label>Kilometros (distancia en KM)</label>
+                                <input type="text" class="form-control" name="distancia" id="distancia" required>
                             </div>
                         </div>
                     </div>
