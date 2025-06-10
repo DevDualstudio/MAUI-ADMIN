@@ -7,10 +7,15 @@ class MauiConnection
 	private $user;
 	private $pass;
 	public function __construct() {
-		$this->server='maui-database.cv7x0hw15acc.us-east-2.rds.amazonaws.com';
+		/* $this->server='maui-database.cv7x0hw15acc.us-east-2.rds.amazonaws.com';
 		$this->user = 'root';
 		$this->pass = 'BDDMySQL.L8M4utg8302YpdRZ6b9O.MAUI2022';
 		$this->database = 'MAUI';
+		$this->conexion = mysqli_connect( $this->server, $this->user, $this->pass, $this->database ); */
+        $this->server='localhost';
+		$this->user = 'root';
+		$this->pass = '';
+		$this->database = 'maui';
 		$this->conexion = mysqli_connect( $this->server, $this->user, $this->pass, $this->database );
 	}
 	public function OpenConnection()
@@ -50,7 +55,7 @@ class MauiConnection
 		mysqli_error( $this->conexion );
 	}
 	function getCampoId( $tabla ) {
-		$str = 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->getDataBaseName() . '" and TABLE_NAME="' . $tabla . '" and COLUMN_KEY = "PRI"';
+		$str = 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->getDataBaseName() . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_KEY = "PRI"';
 		$res = $this->Consulta( $str );
 		while( $R = $this->Resultados( $res ) ) {
 			return $R[ 'columna' ];
@@ -58,12 +63,12 @@ class MauiConnection
 		return false;
 	}
 	public function getCampo( $tabla, $campo ) {
-		$res = $this->Consulta( 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and TABLE_NAME="' . $tabla . '" and COLUMN_COMMENT="' . $campo. '"' );
+		$res = $this->Consulta( 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_COMMENT="' . $campo. '"' );
 		$R = $this->Resultados( $res );
 		return $R[ 'columna' ];
 	}
     public function getComentario( $tabla, $campo ) {
-		$res = $this->Consulta( 'select COLUMN_COMMENT as comentario from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and TABLE_NAME="' . $tabla . '" and COLUMN_NAME="' . $campo. '"' );
+		$res = $this->Consulta( 'select COLUMN_COMMENT as comentario from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_NAME="' . $campo. '"' );
 		$R = $this->Resultados( $res );
 		return $R[ 'comentario' ];
 	}
