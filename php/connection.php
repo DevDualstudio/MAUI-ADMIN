@@ -54,8 +54,14 @@ class MauiConnection
 	public function MuestraError() {
 		mysqli_error( $this->conexion );
 	}
+	 public function getTablaNombre( $tabla ) {
+		$res = $this->Consulta( 'select TABLE_NAME as tabla from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . strtolower( $tabla ) . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" )' );
+		$R = $this->Resultados( $res );
+		return $R[ 'tabla' ];
+	}
 	function getCampoId( $tabla ) {
-		$str = 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->getDataBaseName() . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_KEY = "PRI"';
+        $table = $this->getTablaNombre( $tabla );
+		$str = 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->getDataBaseName() . '" and TABLE_NAME="' . $table . '" and COLUMN_KEY = "PRI"';
 		$res = $this->Consulta( $str );
 		while( $R = $this->Resultados( $res ) ) {
 			return $R[ 'columna' ];
@@ -63,12 +69,14 @@ class MauiConnection
 		return false;
 	}
 	public function getCampo( $tabla, $campo ) {
-		$res = $this->Consulta( 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_COMMENT="' . $campo. '"' );
+        $table = $this->getTablaNombre( $tabla );
+		$res = $this->Consulta( 'select COLUMN_NAME as columna from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and TABLE_NAME="' . $table . '" and COLUMN_COMMENT="' . $campo. '"' );
 		$R = $this->Resultados( $res );
 		return $R[ 'columna' ];
 	}
     public function getComentario( $tabla, $campo ) {
-		$res = $this->Consulta( 'select COLUMN_COMMENT as comentario from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and ( TABLE_NAME="' . $tabla . '" or TABLE_NAME="' . ucfirst( $tabla ) . '" ) and COLUMN_NAME="' . $campo. '"' );
+        $table = $this->getTablaNombre( $tabla );
+		$res = $this->Consulta( 'select COLUMN_COMMENT as comentario from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $this->database . '" and TABLE_NAME="' . $table . '" and COLUMN_NAME="' . $campo. '"' );
 		$R = $this->Resultados( $res );
 		return $R[ 'comentario' ];
 	}

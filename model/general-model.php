@@ -116,8 +116,9 @@ class GeneralModel
         $con =  new MauiConnection();
         $con->OpenConnection();
         $data = array();
-        $campoId = $con->getCampoId( $tabla );
-        $sql = "SELECT * FROM $tabla";
+        $table = $con->getTablaNombre( $tabla );
+        $campoId = $con->getCampoId( $table );
+        $sql = "SELECT * FROM $table";
         $result = $con->Consulta($sql);
         if ($con->Cuantos( $result ) > 0) {
             while( $R = $con->Resultados( $result ) ) {
@@ -154,8 +155,9 @@ class GeneralModel
         $con =  new MauiConnection();
         $con->OpenConnection();
         $data = array();
-        $campoId = $con->getCampoId( $tabla );
-        $sql = "SELECT * FROM $tabla WHERE " . $campo['campo'] . "=" . $campo['id'];
+        $table = $con->getTablaNombre( $tabla );
+        $campoId = $con->getCampoId( $table );
+        $sql = "SELECT * FROM $table WHERE " . $campo['campo'] . "=" . $campo['id'];
         $result = $con->Consulta($sql);
         if ($con->Cuantos( $result ) > 0) {
             while( $R = $con->Resultados( $result ) ) {
@@ -180,9 +182,10 @@ class GeneralModel
         $con =  new MauiConnection();
         $con->OpenConnection();
         $data = array();
-        $campoId = $con->getCampoId( $tabla );
-        $campoNombre = $con->getCampo( $tabla, 'nombre' );
-        $sql = "SELECT " . $campoId . "," . $campoNombre . " FROM $tabla";
+        $table = $con->getTablaNombre( $tabla );
+        $campoId = $con->getCampoId( $table );
+        $campoNombre = $con->getCampo( $table, 'nombre' );
+        $sql = "SELECT " . $campoId . "," . $campoNombre . " FROM $table";
         $result = $con->Consulta($sql);
         if ($con->Cuantos( $result ) > 0) {
             while( $R = $con->Resultados( $result ) ) {
@@ -208,7 +211,8 @@ class GeneralModel
         $columnas = array();
         $con =  new MauiConnection();
         $con->OpenConnection();
-        $sql = 'select COLUMN_COMMENT as comentarios, if ( COLUMN_KEY = "PRI", "S", "N" ) as esLlave, DATA_TYPE as tipoDatos, COLUMN_NAME as columna, if( IS_NULLABLE="NO", "S", "N" ) as obligatoria, COLUMN_DEFAULT as valorDefault, CHARACTER_MAXIMUM_LENGTH as tamano from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $con->getDataBaseName() . '" and TABLE_NAME="' . $tabla . '" order by ORDINAL_POSITION asc';
+        $table = $con->getTablaNombre( $tabla );
+        $sql = 'select COLUMN_COMMENT as comentarios, if ( COLUMN_KEY = "PRI", "S", "N" ) as esLlave, DATA_TYPE as tipoDatos, COLUMN_NAME as columna, if( IS_NULLABLE="NO", "S", "N" ) as obligatoria, COLUMN_DEFAULT as valorDefault, CHARACTER_MAXIMUM_LENGTH as tamano from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA="' . $con->getDataBaseName() . '" and TABLE_NAME="' . $table . '" order by ORDINAL_POSITION asc';
         $result = $con->Consulta($sql);
         if ($con->Cuantos( $result ) > 0) {
             $columnas[] = 'ID'; 

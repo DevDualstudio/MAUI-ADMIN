@@ -11,21 +11,14 @@
 	}
 	function obtenCatalogo( $tabla, $id, $con ) {
 		$dato = '';
-		$campoId = $con->getCampoId( $tabla );
-		$campoNombre = $con->getCampo( $tabla, 'nombre' );
+		$table = $con->getTablaNombre( $tabla );
+		$campoId = $con->getCampoId( $table );
+		$campoNombre = $con->getCampo( $table, 'nombre' );
 		if ( ( !is_null( $campoNombre  ) && $campoNombre != '' )  && ( !is_null( $campoId ) && $campoId != '' ) ) {
-			try {
-				$query = $con->Consulta( 'select ' . $campoNombre . ' from ' . ucfirst( $tabla ) . ' where ' . $campoId . '=' . $id );
-				if ( $con->Cuantos( $query ) > 0) {
-					$R = $con->Resultados( $query );
-					$dato = $R[ $campoNombre ];
-				}
-			} catch (Exception $e) {
-				$query = $con->Consulta( 'select ' . $campoNombre . ' from ' . $tabla . ' where ' . $campoId . '=' . $id );
-				if ($con->Cuantos( $query ) > 0) {
-					$R = $con->Resultados( $query );
-					$dato = $R[ $campoNombre ];
-				}
+			$query = $con->Consulta( 'select ' . $campoNombre . ' from ' . $table . ' where ' . $campoId . '=' . $id );
+			if ( $con->Cuantos( $query ) > 0) {
+				$R = $con->Resultados( $query );
+				$dato = $R[ $campoNombre ];
 			}
 		}
 		return $dato;
